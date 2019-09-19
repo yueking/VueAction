@@ -12,7 +12,10 @@
 	<h3>Vue 基本命令</h3>
 	<ul>
 		<li>v-bind	单项绑定 v-bind:value="username"  :value="username"</li>
-		<li>v-model	双项绑定 v-model:value="username"</li>
+		<li>v-model	双项绑定 v-model="username"</li>
+		<li>v-model	.lazy 	修饰符 同步录入改为change 事件中同步</li>
+		<li>v-model	.number 修饰符 数据输入转换为Number类型,因为默认录入数据是String</li>
+		<li>v-model	.trim 	修饰符 数据输入后 过滤首尾的 空格</li>
 		<li>v-html	渲染输出 html 元素</li>
 		<li>v-pre	无渲染输出</li>
 		<li>v-cloak 解决因网速慢 渲染闪动的问题 不常用</li>

@@ -11,16 +11,68 @@
 </head>
 <body>
 	<div id="app">
+		<input type="checkbox" v-bind:checked="checked" id="checked">
+		<label for="checked">单选按钮单项绑定{{checked}}</label>
+<p></p>
+		<input type="checkbox" v-model="picked" id="picked">
+		<label for="picked">单选按钮{{picked}}</label>
+		<p></p>
+
 		<textarea v-model="text" placeholder="输入..."></textarea>
 		<p>输入的内容是:</p>
 		<p>{{text}}</p>
+
+		<p>组合单选</p>
+		<input type="radio" v-model="choice" value="html" id="html">
+		<label for="html">HTML</label>
+		<br>
+		<input type="radio" v-model="choice" value="js" id="js">
+		<label for="js">JavaScript</label>
+		<br>
+		<input type="radio" v-model="choice" value="css" id="css">
+		<label for="css">CSS</label>
+		<br>
+		<p>你选择的是:{{choice}}</p>
+
+		<p>组合复选</p>
+		<input type="checkbox" v-model="course" value="html" id="html2">
+		<label for="html2">HTML</label>
+		<br>
+		<input type="checkbox" v-model="course" value="js" id="js2">
+		<label for="js2">JavaScript</label>
+		<br>
+		<input type="checkbox" v-model="course" value="css" id="css2">
+		<label for="css2">CSS</label>
+		<br>
+		<p>你选择的是:{{course}}</p>
+
+		<p>选择</p>
+		<select v-model="selected">
+			<option value="html">HTML</option>
+			<option value="js">JavaScript</option>
+			<option value="css">CSS</option>
+		</select>
+		<p>你选择的是:{{selected}}</p>
+
+		<input type="radio" v-model="pick" v-bind:value="value" id="pick">
+		<label for="pick">单选按钮</label>
+		<p>{{pick}}</p>
+		<p>{{value}}</p>
 	</div>
 </body>
 <script>
 	var app = new Vue({
 		el: '#app',
 		data: {
-			text:''
+			text:'',
+			picked:false,
+			checked:true,
+			choice:'js',
+			course:['js'],
+			selected:'js',
+			pick:true,
+			value:123
+
 		}
 	});
 </script>
