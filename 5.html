@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<h3>Vue 基本命令</h3>
+	<ul>
+		<li>v-bind	单项绑定 v-bind:value="username"  :value="username"</li>
+		<li>v-model	双项绑定 v-model:value="username"</li>
+		<li>v-html	渲染输出 html 元素</li>
+		<li>v-pre	无渲染输出</li>
+		<li>v-cloak 解决因网速慢 渲染闪动的问题 不常用</li>
+		<li>v-once  静态渲染 仅渲染一次 除非需要性能优化 否则不常用</li>
+		<li>v-if、 v-else-if、 v-else 条件渲染 v-if=“true === true”时渲染</li>
+		<li>v-show 和 v-if基本一致,v-show 使用过css 的 display 属性进行dom是否隐藏显示 v-if 是DOM的渲染</li>
+		<li>v-show 和 v-if基本一致,v-show 使用过css 的 display 属性进行dom是否隐藏显示 v-if 是DOM的渲染</li>
+		<li>v-show 不能用在template上</li>
+		<li>v-for <span v-pre> v-for="book in books"{{book.name}}</span></li>
+		<li>v-for <span v-pre> v-for="(book,index) in books"{{index}}-{{book.name}}</span></li>
+		<li>v-for <span v-pre> v-for="(value,key,index) in objects"{{index}}-{{key}}:{{value}}</span></li>
+		<li>v-for <span v-pre> v-for="i in 10"{{i}} 整数迭代</span></li>
+	</ul>
+
+	<div id="app">
+		<template v-if="type ==='name' ">
+			<label key="ln">用户名:</label>
+			<input placeholder="输入用户名" key="name-input">
+		</template>
+		<template v-else>
+			<label key="lm">邮箱:</label>
+			<input placeholder="输入邮箱" key="mail-input">
+		</template>
+		<button @click="changeInputType">切换输入类型</button>
+	</div>
+</body>
+<script>
+	new Vue({
+		el:'#app',
+		data:{
+			type:name
+		},
+		methods:{
+			changeInputType:function(){
+				this.type = this.type === 'name'?'mail':'name'; 
+			}
+		}
+	});
+</script>
+</html>

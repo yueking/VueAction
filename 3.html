@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		姓名:{{fullname}}
+		<p/>
+		myname:{{myname}}
+
+		<p/>
+		<label for="firstName">firstName:</label>
+		<input type="text" v-model="firstName" id="firstName">
+		<p/>
+		<label for="lastName">lastName:</label>
+		<input type="text" v-model="lastName" id="lastName">
+
+		<p/>
+		<label for="fullname">fullname:</label>
+		<input type="text" v-model="fullname" id="fullname">
+	</div>
+	
+</body>
+<script>
+	new Vue({
+		el:'#app',
+		data:{
+			firstName:'Jack',
+			lastName:'Green'
+		},
+		computed:{
+			//计算方法 可以依赖其他计算属性 和 其他 vue实例中的属性
+			myname:function(){
+				//简写默认 计算
+				return 'yueking';
+			},
+			fullname:{
+				//具体自定义 set get
+				get:function(){
+					return this.firstName+' '+this.lastName;
+				},
+				set:function(newValue){
+					var names = newValue.split(' ');
+					this.firstName = names[0];
+					this.lastName = names[names.length - 1];
+				}
+
+			}
+		}
+	});
+</script>
+</html>

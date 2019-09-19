@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		点击次数:{{counter}}
+		<button @click="handleAdd()">+1</button>
+		<button @click="handleAdd(10)">+10</button>
+		<a href="http://www.apple.com" @click="handleClick('禁止打开',$event)">打开链接</a>
+	</div>
+</body>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			counter:0
+		},
+		methods: {
+			handleAdd:function(count){
+				count = count || 1;
+				this.counter += count;
+			},
+			handleClick:function(message, event){
+				event.preventDefault();
+				window.alert(message);
+			}
+		}
+	});
+</script>	
+</html>

@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<title>javascript</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<input type="type" v-model="name" placeholder="your name">
+		<h3>{{name}}</h3>
+		<h3>{{cname}}</h3>
+		<button v-on:click="change">change</button>
+		<button v-on:click="back">back</button>
+
+	</div>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+	<script>
+		const vm = new Vue({
+			el: '#app',
+			data: { 
+				alexa: 10000,
+				sesn:true,
+				name:"yue",
+				cname:'yuewu'
+			},
+			methods:{
+				change:function () {
+					vm.$el.style.background='#220';
+
+					// body...
+				},
+				back:function () {
+					vm.$el.style.background='#fff';
+					// body...
+					console.log('backMethod')
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

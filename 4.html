@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <div class="alert" :class="{'alert-success':status,'alert-warning':!status}">hello</div> -->
+		<div class="alert" :class="classes">hello</div>
+		{{status}}
+		<button @click="change">切换</button>
+
+		<p/>
+		<a @click="minus"><span :class="minustyle"></span></a>
+		<input type="number" v-model="count">
+		<a @click="plus"><span :class="plustyle"></span></a>
+		<input type="type" name="aa" :value="count">
+	</div>
+</body>
+<script>
+	new Vue({
+		el:'#app',
+		data:{
+			status:true,
+			count:0
+		},
+		methods:{
+			change:function () {
+				this.status = this.status ? false:true;
+			},
+			plus:function(){
+				this.count += 1;
+			},
+			minus:function(){
+				this.count -= 1;
+			}
+		},
+		computed:{
+			classes:function(){
+				return{
+					'alert-success':this.status,'alert-warning':!this.status
+				}
+			},
+			plustyle:function(){
+				return['glyphicon', 'glyphicon-plus-sign']
+			},
+			minustyle:function(){
+				return ['glyphicon',{'glyphicon-minus-sign':this.count > 0}]
+			}
+
+		}
+
+	});
+</script>
+</html>
