@@ -130,11 +130,3 @@
 			}
 		}
 	});
-
-
-// app.$watch('selectAll', function(nval, oval) {
-    // alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
-// });
-
-
-
