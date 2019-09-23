@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>组件可以 进行全局注册 或者 局部注册两种 常用的是全局注册</p>
+		<p>组件定义中 data 需要用函数的方式把数据返回出去 </p>
+		<p>组件定义中 data 如果引用JavaScript对象那么这个对象是全局共享的 因为是引用的关系</p>
+		<p>组件定义中 使用props 传递数据,并且props默认是字符串，当配合v-bind 时才能使用js的各种数据类型</p>
+		<p>props 参数名称必须使用数组 或者对象 比如数组 []扩起来 props:['p1','p2']</p>
+		<p>props 组件内引用 props 时使用 this.p1</p>
+		<p>{{name}}</p>
+		<input type="text" v-model="name">
+		<table>
+			<my-component :p1="name"></my-component>
+			<my-component></my-component>
+			<my-component></my-component>
+		</table>
+
+		
+		resource:{{person}}
+		<p></p>
+
+		<p></p>
+		<yue-component :p1="person"></yue-component>
+	</div>
+</body>
+<script>
+	var data = {
+		counter:0
+	}
+	Vue.component('my-component',{
+		props:['p1', 'p2', 'p3'],
+		template: '<div>这里是我的组件P1:{{p1}}<button @click="counter++">{{counter}}</button> <button @click="modifyP1()">modfyP1</button></div>',
+		data:function(){
+			//局部私有数据
+			return {
+				counter:0
+			}
+			// return data;//全局共享数据
+		},
+		methods:{
+			modifyP1:function(){
+				this.p1+='yueking';
+			}
+		}
+	});
+
+//修改父类 传入的参数：因为传过来的是对象或者是数组 其本质是引用
+	Vue.component('yue-component',{
+		props:['p1'],
+		template:'<div>p1:{{p1}}<button @click="modify()">modify</button></div>',
+		data:{
+			
+				 person:this.p1
+			
+		},
+		methods:{
+			modify:function(){
+				this.p1.name='yuewu';
+				this.p1.age=33;
+				this.p1.email='yuewu@126.com'
+			}
+		}
+	});
+
+	var app = new Vue({
+		el: '#app',
+		data: {
+			name:'yuekinger',
+			person:{
+				name:'yueking',
+				age:23,
+				email:'yueking@gmail.com'
+			}
+		}
+
+	});
+</script>
+</html>
