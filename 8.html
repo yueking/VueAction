@@ -10,6 +10,60 @@
 	<script src="js/vue.js"></script>
 </head>
 <body>
+	<div id="app">
+		<p>组件通讯</p>
+		<ul>
+			<li>父组件向子组件通讯		单向props</li>
+			<li>父组件向子组件通讯		双向props 传对象的引用或者数组的引用</li>
+			<li>子组件向父组件通讯		$emit</li>
+			<li>1</li>
+		</ul>
+
+		<p>总数:{{total}}</p>
+		<!-- v-on 坚挺子组件发出的事件 后 执行 方法 handleGetTotal -->
+		<!-- <my-component @increase="handleGetTotal" @reduce="handleGetTotal" @click.native="handelNative"></my-component> -->
+		<my-component @increase="handleGetTotal" @reduce="handleGetTotal"></my-component>
+
+	</div>
 	
 </body>
+<script>
+
+	Vue.component('my-component',{
+		template:'<div><button @click="handleIncrease">+1</button> <button @click="handleReduce">-1</button></div>',
+		data:function(){
+			return {
+				counter:0
+			}
+		},
+		methods:{
+			handleIncrease:function(){
+				this.counter++;
+				//send 自定义事件和数据
+				this.$emit('increase',this.counter);
+			},
+			handleReduce:function(){
+				this.counter--;
+				this.$emit('reduce',this.counter);
+			}
+		}
+	});
+
+	var app = new Vue({
+		el:'#app'
+		,
+		data:{
+			total:0
+		}
+		,
+		methods: {
+			handleGetTotal:function(subTotal){
+				this.total=subTotal;
+			},
+			handelNative:function(value){
+				alert(JSON.stringify(value));
+			}
+		}
+	});
+</script>
 </html>
