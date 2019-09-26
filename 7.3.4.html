@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>message:{{message}}</p>
+		<component-a></component-a>
+	</div>
+</body>
+<script>
+	Vue.component('component-a',{
+		template:'<button @click="handleEvent">通过父链修改数据</button>',
+		methods:{
+			handleEvent:function(){
+				this.$parent.message='来自组件 component-a 的内容';
+			}
+		}
+	});
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			message:''
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>counter:{{counter}}</p>
+		<my-component v-model="counter"></my-component>
+	</div>
+</body>
+<script>
+	Vue.component('my-component',{
+		props:['value'],
+		template:'<div><input :value="value" @input="updateValue"/><button @click="plus">+1</button> <button @click="reduce">-1</button></div>',
+		data:function(){
+			return {
+				counter:this.value
+			}
+		},
+		methods:{
+			plus:function(){
+				this.counter++;
+				this.$emit('input',this.counter);
+			},
+			reduce:function(){
+				this.counter--;
+				this.$emit('input',this.counter);
+			},
+			updateValue:function(event){
+				this.$emit('input',event.target.value);
+				this.counter = event.target.value;
+			}
+		}
+
+	});
+
+	var app = new Vue({
+		el: '#app',
+		data: {
+			counter:100
+		}
+	});
+</script>
+</html>
