@@ -11,14 +11,20 @@
 </head>
 <body>
 	<div id="app">
+		<p>count:{{count}}</p>
+		<my-component v-model="count"></my-component>
+		<p></p>
 		<p>counter:{{counter}}</p>
 		<my-component v-model="counter"></my-component>
+
+		<button @click="init()">init</button>
 	</div>
 </body>
 <script>
 	Vue.component('my-component',{
 		props:['value'],
-		template:'<div><input :value="value" @input="updateValue"/><button @click="plus">+1</button> <button @click="reduce">-1</button></div>',
+		// template:'<div><input v-model="value" @input="updateValue"/><button @click="plus">+1</button> <button @click="reduce">-1</button></div>',
+		template:'<div><input v-model="value" @input="updateValue"/><button @click="plus">+1</button> <button @click="reduce">-1</button></div>',
 		data:function(){
 			return {
 				counter:this.value
@@ -44,7 +50,14 @@
 	var app = new Vue({
 		el: '#app',
 		data: {
-			counter:100
+			counter:100,
+			count:50
+		},
+		methods: {
+			init:function(){
+				this.counter=0;
+				this.count=0;
+			}
 		}
 	});
 </script>
