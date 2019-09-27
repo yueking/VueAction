@@ -15,7 +15,7 @@
 		<p>组件定义中 data 需要用函数的方式把数据返回出去 </p>
 		<p>组件定义中 data 如果引用JavaScript对象那么这个对象是全局共享的 因为是引用的关系</p>
 		<p>组件定义中 使用props 传递数据,并且props默认是字符串，当配合v-bind 时才能使用js的各种数据类型</p>
-		<p>props 参数名称必须使用数组 或者对象 比如数组 []扩起来 props:['p1','p2']</p>
+		<p>props 参数名称必须使用 字符串数组 或者对象 比如数组 []扩起来 props:['p1','p2']</p>
 		<p>props 组件内引用 props 时使用 this.p1</p>
 		<p>{{name}}</p>
 		<input type="text" v-model="name">
