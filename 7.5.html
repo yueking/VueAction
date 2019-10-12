@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child-component :count="1"></child-component>
+	</div>
+</body>
+<script>
+	//这个事例没有任何显示 暂时不明白表达的是啥意思
+	Vue.component('child-component',{
+		name: 'child-component',
+		props:{
+			count:{
+				type:Number,
+				default:1
+			}
+		},
+		template:'\
+		<div class="child">\
+		<child-component :count="count+1" v-if="count < 3">Hello</child-component>\
+		</div>'
+	});
+
+	var app = new Vue({
+		el:'#app'
+	})
+</script>
+</html>

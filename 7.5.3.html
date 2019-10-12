@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<component :is="currentView"></component>
+		<button @click="handleChangeView('A')">切换到组件A</button>
+		<button @click="handleChangeView('B')">切换到组件B</button>
+		<button @click="handleChangeView('C')">切换到组件C</button>
+	</div>
+</body>
+<script>
+	var app = new Vue({
+		el:'#app',
+		components: {
+			comA:{
+				template:'<div>组件A</div>'
+			},
+			comB:{
+				template:'<div>组件B</div>'
+			},
+			comC:{
+				template:'<div>组件C</div>'
+			}
+		},
+		data:{
+			currentView:'comA'
+		},
+		methods:{
+			handleChangeView:function(componen){
+				this.currentView = 'com'+componen;
+			}
+		}
+	});
+</script>
+</html>
