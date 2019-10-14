@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child-component></child-component>
+	</div>
+</body>
+<script>
+	Vue.component('child-component',function(resolve,reject) {
+		//这里作为异步演示使用 timeOut 实际项目使用后台数据加载
+		window.setTimeout(function(){
+			resolve({
+				template: '<div>我是异步渲染T:{{t}}</div>'
+			});
+		},3000);
+	});
+
+	var app = new Vue({
+		el: '#app',
+		data: {
+			t=new Date();
+		}
+	})
+</script>
+</html>
