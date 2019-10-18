@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
 	<script src="bootstrap/js/bootstrap.js"></script>
@@ -15,6 +15,7 @@
 		<p/>
 		<h5>value:{{value}}</h5>
 		<h5>age:{{age}}</h5>
+		<button @click="init">init</button>
 	</div>
 </body>
 <script src="js/input-number.js"></script>
@@ -24,6 +25,12 @@
 		data: {
 			value: 5,
 			age:20
+		},
+		methods: {
+			init:function(){
+				this.value=0;
+				this.age=12;
+			}
 		}
 	});
 </script>
