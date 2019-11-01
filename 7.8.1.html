@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+
+	<div id="app">
+		<h4>Hello My Input </h4>
+
+		<my-input v-model="age"></my-input>
+		<my-input v-model="number"></my-input>
+		<p>age:{{age}}</p>
+		<p>number:{{number}}</p>
+
+		<button @click="init">init</button>
+	</div>
+	
+</body>
+<script>
+	Vue.component('my-input',{
+		template:'<div><input type="text" :value="currentValue" @change="handleChange" /> <button @click="clickDown">-</button> <button @click="clickUp">+</button></div>',
+		props:['value'],
+		data:function(){
+			return {
+				currentValue:this.value
+			}
+		},
+		methods:{
+			clickUp:function(){
+				this.currentValue += 1;
+			},
+			clickDown:function(){
+				this.currentValue -= 1;
+			},
+			updateValue:function(val){
+				this.currentValue = val;
+			},
+			handleChange:function(event){
+				//1.每次input控件被录入新值 更新到 my-input 本地私有属性 currentValue
+				var val = event.target.value.trim();
+				val = Number(val);
+				this.updateValue(val);
+			}
+		},
+		watch:{
+			//2.数据接收:监控父类 传入参数变化 更新到 my-input 本地私有属性
+			value:function(val){
+				this.updateValue(val);
+			},
+			//3.数据发送:监控本地  my-input 私有属性 有变化时 更新input控件
+			currentValue:function(val){
+				this.$emit('input',val);
+				this.$emit('on-change',val);
+			}
+		},
+		mounted:function(){
+			this.updateValue(this.value);
+		}
+	});
+
+	var app = new Vue({
+		el: '#app',
+		data:{
+			age:20,
+			number:100
+		},
+		methods:{
+			init:function(){
+				this.age = 20;
+				this.number = 100;
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h4>Hello My Number Input </h4>
+		<my-input v-model="age"></my-input>
+		<my-input v-model="num"></my-input>
+		
+		age:{{age}}
+		<p></p>
+		num:{{num}}
+		<p></p>
+		<button @click="init">init</button>
+	</div>
+	</div>
+</body>
+<script>
+	Vue.component('my-input',{
+		props:['value'],
+		template:'<div><input type="text" :value="currentValue" @change="handleChange" /> <button @click="clickDown">-</button> <button @click="clickUp">+</button></div>',
+		data:function(){
+			return{
+				currentValue : this.value
+			}
+		},
+		watch:{
+			value:function(val){
+				// updateValue(val); 一定要用 this 否则行为不是你想要的行为
+				// this.updateValue(val);
+				updateValue(val);
+			},
+			currentValue:function(val){
+				this.$emit('input',val);
+				this.$emit('on-change',val);
+			}
+		},
+		methods: {
+			clickUp:function(){
+				this.currentValue += 1;
+			},
+			clickDown:function(){
+				this.currentValue -= 1;
+			},
+			updateValue:function(val){
+				this.currentValue = val;
+			},
+			handleChange:function(event){
+				var val = event.target.value;
+				val = Number(val);
+				// updateValue(val); 为什么不能替代下面的代码
+				// this.currentValue = val;
+				this.updateValue(val);
+			}
+		},
+		mounted:function(){
+			this.updateValue(this.value);
+		}
+
+		
+	});
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			age:20,
+			num:30
+		},
+		methods:{
+			init:function(){
+				alert('init');
+				this.age=0;
+				this.num=0;
+			}
+		}
+	});
+</script>
+</html>
