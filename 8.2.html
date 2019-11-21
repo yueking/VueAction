@@ -7,7 +7,7 @@
 	<script src="js/vue.js"></script>
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak>
 		<div class="main" v-clickoutside="handleClose">
 			<button @click="show = !show">点击显示下拉菜单</button>
 			<div class="dropdown" v-show="show">
@@ -17,6 +17,9 @@
 	</div>
 </body>
 <style>
+	[v-cloak]{
+		display:none;
+	}
 	.main{
 		width:125px;
 	}
@@ -53,18 +56,6 @@
 	}
 </style>
 <script>
-	var app = new Vue({
-		el: '#app',
-		data: {
-			show:false
-		},
-		methods: {
-			handleChange:function(){
-				this.show = false;
-			}
-		}
-	});
-
 	Vue.directive('clickoutside',{
 		bind:function(el,binding,vnode){
 			function documentHandler(e){
@@ -83,5 +74,19 @@
 			delete el.__vueClickOutside__;
 		}
 	});
+	
+	var app = new Vue({
+		el: '#app',
+		data: {
+			show:false
+		},
+		methods: {
+			handleClose:function(){
+				this.show = false;
+			}
+		}
+	});
+
+	
 </script>
 </html>
