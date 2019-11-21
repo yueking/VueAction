@@ -6,16 +6,6 @@
 	<script src="js/jquery-3.4.1.js"></script>
 	<script src="js/vue.js"></script>
 </head>
-<body>
-	<div id="app" v-cloak>
-		<div class="main" v-clickoutside="handleClose">
-			<button @click="show = !show">点击显示下拉菜单</button>
-			<div class="dropdown" v-show="show">
-				<p>下拉框的内容，点击外面的区域可以关闭</p>
-			</div>
-		</div>
-	</div>
-</body>
 <style>
 	[v-cloak]{
 		display:none;
@@ -52,9 +42,20 @@
 	}
 	.dropdown p{
 		display:inline-block;
-		padding:6px;
+		padding:10px;
 	}
 </style>
+<body>
+	<div id="app" v-cloak>
+		<div class="main" v-clickoutside="handleClose">
+			<button @click="show = !show">点击显示下拉菜单</button>
+			<div class="dropdown" v-show="show">
+				<p>下拉框的内容，点击外面的区域可以关闭</p>
+			</div>
+		</div>
+	</div>
+</body>
+
 <script>
 	Vue.directive('clickoutside',{
 		bind:function(el,binding,vnode){
@@ -74,7 +75,7 @@
 			delete el.__vueClickOutside__;
 		}
 	});
-	
+
 	var app = new Vue({
 		el: '#app',
 		data: {
