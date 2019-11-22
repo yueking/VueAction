@@ -60,18 +60,39 @@
 	Vue.directive('clickoutside',{
 		bind:function(el,binding,vnode){
 			function documentHandler(e){
-				if(el.contains(e.target)){
-					return false;
-				}
-				if(binding.expression){
-					binding.value(e);
+				//如果 按 esc 无论在控件内外都 执行表达式 handleClose 方法
+				if(e instanceof  KeyboardEvent){
+					// alert(e.keyCode);
+					if(e.keyCode == 27){
+						if(binding.expression){
+							binding.value(false);
+						}
+					}
+
+					if(e.keyCode == 32){
+						if(binding.expression){
+							binding.value(true);
+						}
+					}
+				}else{
+					if(el.contains(e.target)){
+						return false;
+					}
+					if(binding.expression){
+						binding.value(false);
+					}
 				}
 			}
 			el.__vueClickOutside__ = documentHandler;
 			document.addEventListener('click',documentHandler);
+			document.addEventListener('keydown',documentHandler);
+		},
+		update:function(el,binding){
+			//todo smt... 
 		},
 		unbind:function(el,binding){
 			document.removeEventListener('click',el.__vueClickOutside__);
+			document.removeEventListener('keydown',el.__vueClickOutside__);
 			delete el.__vueClickOutside__;
 		}
 	});
@@ -82,8 +103,9 @@
 			show:false
 		},
 		methods: {
-			handleClose:function(){
-				this.show = false;
+			handleClose:function(e){
+				// this.show = false;
+				this.show = e;
 			}
 		}
 	});
